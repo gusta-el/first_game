@@ -1,2 +1,2 @@
 # first_game
-Jogo da matéria do Banin
+1º Semestre: jogo do Banin e do Alan
