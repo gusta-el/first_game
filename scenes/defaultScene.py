@@ -5,7 +5,6 @@ class DefaultScene(Scene):
 
     def start(self):
         self.img = pygame.image.load("res/img.png")
-
         self.timer = 0
 
         pass

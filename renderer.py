@@ -1,32 +1,37 @@
-import pygame
+import pygame, math
 
 class Renderer:
 
+
+
     def __init__(self, screen):
         self.screen = screen
-        pass
+        self.color = pygame.Color(255, 255, 255, 1)
 
     def drawLine(self, x1, y1, x2, y2):
-        pass
+        pygame.draw.line(self.screen, self.color, (x1, y1), (x2, y2))
 
     def drawRect(self, x, y, w, h):
-        pass
+        pygame.draw.rect(self.screen, self.color, pygame.Rect(x, y, w, h), 1)
+
+    def fillRect(self, x, y, w, h):
+        pygame.draw.rect(self.screen, self.color, pygame.Rect(x, y, w, h), 0)
 
     def drawCircle(self, x, y, radius):
-        pass
+        pygame.draw.circle(self.screen, self.color, (x, y), radius, 1)
+
+    def fillCircle(self, x, y, radius):
+        pygame.draw.circle(self.screen, self.color, (x, y), radius, 0)
 
     def setColor(self, color):
-        pass
+        self.color = color
 
-    def drawTexture(self, texture, x, y, w, h):
-        tex = texture
-        tex = pygame.transform.scale(tex, (w, h))
-        self.screen.blit(tex, pygame.Rect(x, y, 0, 0))
-        pass
+    def setColor(self, r, g, b, a):
+        self.color = pygame.Color(r, g, b, a)
 
-    def drawTexture(self, texture, x, y, w, h, rotation):
-        tex = texture
-        tex = pygame.transform.rotozoom(tex, rotation, 1)
-        tex = pygame.transform.scale(tex, (w, h))
-        self.screen.blit(tex, pygame.Rect(x, y, 0, 0))
-        pass
+    def drawTexture(self, texture, x, y, w, h, rotation=0, off_x=0, off_y=0):
+        tex = pygame.transform.scale(texture, (w, h))
+        tex = pygame.transform.rotate(tex, rotation)
+        nx = x - math.cos(math.radians(rotation)) * off_x - math.sin(math.radians(rotation)) * off_y
+        ny = y - math.cos(math.radians(rotation)) * off_y + math.sin(math.radians(rotation)) * off_x
+        self.screen.blit(tex, tex.get_rect(center=(nx, ny)))
