@@ -1,12 +1,12 @@
 import pygame
 import pygame
 from pygame.math import Vector2
+from physics.body import Body
 
-class Player:
+class Player(Body):
 
     def __init__(self):
-        self.position = Vector2(0, 0)
-        self.velocity = Vector2(0, 0)
+        super().__init__(Vector2(0, 0), 'rect', Vector2(50, 50), 'dynamic')
         self.texture = pygame.image.load("res/character.png")
 
         self.speed = 5
@@ -16,17 +16,14 @@ class Player:
 
     def render(self, renderer):
         renderer.drawTexture(self.texture, self.position[0], self.position[1], 64, 64)
-        pass
+        super().render(renderer)
 
     def update(self, delta):
-        self.position += self.velocity
-
         if self.hor != 0 or self.ver != 0:
             tvel = Vector2(self.hor, self.ver).normalize() * self.speed
         else: tvel = Vector2(0, 0)
 
         self.velocity += (tvel - self.velocity) / 5
-        pass
 
     def input(self, event):
         if event.type == pygame.KEYDOWN:
