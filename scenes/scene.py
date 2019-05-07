@@ -10,7 +10,7 @@ class Scene(ABC):
         pass
 
     @abstractmethod
-    def input(self, keys):
+    def input(self, event):
         pass
 
     @abstractmethod

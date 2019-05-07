@@ -1,9 +1,7 @@
 import pygame, math
 
 class Renderer:
-
-
-
+    
     def __init__(self, screen):
         self.screen = screen
         self.color = pygame.Color(255, 255, 255, 1)
@@ -22,9 +20,6 @@ class Renderer:
 
     def fillCircle(self, x, y, radius):
         pygame.draw.circle(self.screen, self.color, (x, y), radius, 0)
-
-    def setColor(self, color):
-        self.color = color
 
     def setColor(self, r, g, b, a):
         self.color = pygame.Color(r, g, b, a)

@@ -12,8 +12,8 @@ class Manager:
         self.all_scenes[self.index].start()
         pass
 
-    def input(self, keys):
-        self.all_scenes[self.index].input(keys)
+    def input(self, event):
+        self.all_scenes[self.index].input(event)
         pass
 
     def update(self, delta):

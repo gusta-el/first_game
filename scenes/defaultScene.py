@@ -1,21 +1,24 @@
 import pygame
+import pybox2d
 from scenes.scene import Scene
+from scenes.character import Player
 
 class DefaultScene(Scene):
 
     def start(self):
-        self.img = pygame.image.load("res/img.png")
-        self.timer = 0
+        self.character = Player()
 
+        self.world = b2World()
         pass
 
-    def input(self, keys):
+    def input(self, event):
+        self.character.input(event)
         pass
 
     def update(self, delta):
-        self.timer += delta * 50
+        self.character.update(delta)
         pass
 
     def render(self, renderer):
-        renderer.drawTexture(self.img, 100, 100, 100, 100, self.timer)
+        self.character.render(renderer)
         pass

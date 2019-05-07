@@ -24,9 +24,7 @@ while 1:
     #Inputs
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-    
-    keys = pygame.key.get_pressed()
-    manager.input(keys)
+        manager.input(event)    
 
     #Screen Render
     screen.fill(fillColor)
