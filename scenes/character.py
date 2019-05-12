@@ -6,7 +6,7 @@ from physics.body import Body
 class Player(Body):
 
     def __init__(self):
-        super().__init__(Vector2(0, 0), 'circle', 30, 'dynamic')
+        super().__init__(Vector2(0, 0), 'rect', pygame.Vector2(50, 50), 'dynamic')
         self.texture = pygame.image.load("res/character.png")
 
         self.speed = 5

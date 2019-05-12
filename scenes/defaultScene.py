@@ -12,7 +12,7 @@ class DefaultScene(Scene):
         self.world = World(Vector2(0, 0))
 
         self.world.addBody(self.character)
-        self.world.addBody(Body(pygame.Vector2(300, 300), 'circle', 25, 'static'))
+        self.world.addBody(Body(pygame.Vector2(300, 300), 'rect', pygame.Vector2(60, 40), 'static'))
         pass
 
     def input(self, event):
