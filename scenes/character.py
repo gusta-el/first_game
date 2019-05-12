@@ -6,7 +6,7 @@ from physics.body import Body
 class Player(Body):
 
     def __init__(self):
-        super().__init__(Vector2(0, 0), 'rect', Vector2(50, 50), 'dynamic')
+        super().__init__(Vector2(0, 0), 'circle', 30, 'dynamic')
         self.texture = pygame.image.load("res/character.png")
 
         self.speed = 5
@@ -15,7 +15,7 @@ class Player(Body):
         pass
 
     def render(self, renderer):
-        renderer.drawTexture(self.texture, self.position[0], self.position[1], 64, 64)
+        renderer.drawTexture(self.texture, self.position.x, self.position.y, 64, 64)
         super().render(renderer)
 
     def update(self, delta):

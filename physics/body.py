@@ -27,6 +27,6 @@ class Body:
         if self.shape == 'rect':
             renderer.drawRect(self.position.x - self.size.x/2, self.position.y - self.size.y/2, self.size.x, self.size.y)
         elif self.shape == 'circle':
-            renderer.drawCircle(self.position.x, self.position.y, self.size)
+            renderer.drawCircle(int(self.position.x), int(self.position.y), int(self.size))
 
     
