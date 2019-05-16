@@ -4,6 +4,8 @@ from renderer import Renderer
 pygame.init()
 size = width, height = 640, 480
 
+pygame.screen_size = size
+
 #Game attributes
 fps = 60
 target = 1/fps

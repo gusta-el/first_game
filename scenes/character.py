@@ -15,6 +15,9 @@ class Player(Body):
         pass
 
     def render(self, renderer):
+
+        renderer.camera_pos += (self.position - renderer.camera_pos) / 5
+
         renderer.drawTexture(self.texture, self.position.x, self.position.y, 64, 64)
         super().render(renderer)
 
