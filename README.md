@@ -119,11 +119,12 @@ Lista de todos os ```event.type``` e suas variáveis internas:
 Depois de definido a classe de objeto criada, é necessário colocar uma instância deste objeto em alguma cena. Atualmente temos definido uma única cena chamada ```DefaultScene```. Para que o objeto seja renderizado corretamente, é necessário criar a instância, e chamar os métodos da seguinte forma:
 
 ```python
+from objects.nomedoarquivo import NomeDaClasse
 class DefaultScene(Scene):
 
     def start(self):
         ...
-        self.objeto = Classe(parametros)
+        self.objeto = NomeDaClasse(parametros)
         ...
 
     def input(self, event):
@@ -168,3 +169,29 @@ Ao definir esta estrutura, as seguintes propriedades ficarão disponíveis dentr
 
 O método ```collide(other)``` receberá um evento de quando este objeto colidiu com algum outro objeto.
 Dentro deste método você pode fazer alguma ação quando certo objeto colide com outro objeto (Ex. um projétil atinge o jogador, destruindo o projétil, e causando dano). A colisão pode ser desligada (os objetos atravessam entre si) caso o retorno desta função seja ```False```. Por padrão, sempre retorne ```True``` no final deste método
+
+#### Classe World
+
+Para que a colisão seja calculada corretamente, dentro da classe da cena (no caso padrão, a cena é a ```DefaultScene```) é necessário ter uma instância da classe ```World``` que é um objeto que armazena todos os outros objetos que contém colisão, ele é o responsável por fazer o cálculo e atualizar as posições dos objetos.
+
+Para registrar um objeto dentro do mundo, para que seus cálculos sejam feitos, dentro do método ```start()``` na classe ```DefaultScene``` (depois da inicialização do ```World```), use o código:
+
+```python
+from objects.nomedoarquivo import NomeDaClasse
+
+class DefaultScene(Scene):
+
+    def start(self):
+        self.objeto = MeuObjeto()
+        self.world = World(Vector2(0, 0))
+        self.world.addBody(self.objeto)
+
+    ...
+```
+
+Dentro do objeto de física, caso queira que a caixa de colisão seja desenhada (para propósitos de teste), apenas chame a função (dentro da classe do SEU objeto criado):
+
+```python
+    def render(self, renderer):
+        super().render(renderer)
+```
