@@ -21,8 +21,8 @@ class World:
         a1 = pygame.Rect(aabb1.position.x - aabb1.size.x/2, aabb1.position.y - aabb1.size.y/2, aabb1.size.x, aabb1.size.y)
         a2 = pygame.Rect(aabb2.position.x - aabb2.size.x/2, aabb2.position.y - aabb2.size.y/2, aabb2.size.x, aabb2.size.y)
 
-        dfx = (a1.width/2 + a2.width/2 - abs(a1.x - a2.x)) * (-1 if a1.x - a2.x < 0 else 1)
-        dfy = (a1.height/2 + a2.height/2 - abs(a1.y - a2.y)) * (-1 if a1.y - a2.y < 0 else 1)
+        dfx = a1.x - a2.x
+        dfy = a1.y - a2.y
 
         return False if not a1.colliderect(a2) else (dfx, dfy)
 
@@ -69,7 +69,6 @@ class World:
                 for  body2 in self.bodies:
                     if body2 != body:
 
-                        
                         if body.shape == 'rect':
                             #NÃO FUNCIONA
                             if body2.shape == 'circle':
@@ -82,14 +81,25 @@ class World:
                             if body2.shape == 'rect':
                                 c = self.checkCollisionAABB(body, body2)
                                 if isinstance(c, tuple) :
-                                    print(c)
                                     body.position = lastPos
-                                    if abs(c[0]) < abs(c[1]):
-                                        body.velocity.x = 0
-                                    elif abs(c[0]) > abs(c[1]):
-                                        body.velocity.y = 0
-                                    else:
-                                        body.velocity = pygame.Vector2(0, 0)
+
+                                    print(c)
+
+                                    if(abs(c[0]) > abs(c[1])):
+                                        if(c[0] > 0):
+                                            body.position.x = body2.position.x + body2.size.x/2 + body.size.x/2
+                                            body.velocity.x = 0
+                                        else:
+                                            body.position.x = body2.position.x - body2.size.x/2 - body.size.x/2
+                                            body.velocity.x = 0
+                                    elif(abs(c[0]) < abs(c[1])):
+                                        if(c[1] > 0):
+                                            body.position.y = body2.position.y + body2.size.y/2 + body.size.y/2
+                                            body.velocity.y = 0
+                                        else:
+                                            body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
+                                            body.velocity.y = 0
+
                                     body.position += body.velocity
 
                                     break
