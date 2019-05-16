@@ -113,3 +113,58 @@ Lista de todos os ```event.type``` e suas variáveis internas:
 - VIDEORESIZE      size, w, h
 - VIDEOEXPOSE      none
 - USEREVENT        code
+
+#### Colocar os objetos em uma cena
+
+Depois de definido a classe de objeto criada, é necessário colocar uma instância deste objeto em alguma cena. Atualmente temos definido uma única cena chamada ```DefaultScene```. Para que o objeto seja renderizado corretamente, é necessário criar a instância, e chamar os métodos da seguinte forma:
+
+```python
+class DefaultScene(Scene):
+
+    def start(self):
+        ...
+        self.objeto = Classe(parametros)
+        ...
+
+    def input(self, event):
+        ...
+        self.objeto.input(event)
+        ...
+
+    def update(self, delta):
+        ...
+        self.objeto.update(delta)
+        ...
+
+    def render(self, renderer):
+        ...
+        self.objeto.render(renderer)
+        ...
+```
+
+### Física e detecção de colisão
+
+Atualmente existe uma classe chamada ```Body``` que representa um corpo com colisão AABB (Axis Aligned Bounding Box). Para atrelar um corpo a um objeto, o objeto criado deve ser uma especialização da classe ```Body```, tendo como sua declaração a seguinte estrutura:
+
+```python
+
+from physics.body import Body
+class MeuObjeto(Body):
+
+    def __init__(self, parametros):
+        super().__init__(pygame.Vector2(Posição X, Posição Y), 'rect', pygame.Vector2(Largura, Altura), 'dynamic') #Objetos "dynamic" podem ser movidos, enquanto objetos "static" são fixos no mapa e não se movem (feito para economizar processamento)
+    ... resto da classe
+
+    def collide(self, other):
+        return True
+```
+
+Ao definir esta estrutura, as seguintes propriedades ficarão disponíveis dentro do objeto:
+
+- ```self.position```: Posição do objeto, (no caso, simplesmente desenhe a textura nesta posição ao invés de ter outra variável de posição só para a textura). Use somente para VER a posiçaõ do objeto, e não para DEFINIR ela (vide propriedade a baixo)
+- ```self.velocity```: Velocidade do objeto (é recomendável movimentar o objeto por esta variável ao invés de definir a posição dele manualmente, a biblioteca de física já lida com isso)
+
+#### Detecção de colisão
+
+O método ```collide(other)``` receberá um evento de quando este objeto colidiu com algum outro objeto.
+Dentro deste método você pode fazer alguma ação quando certo objeto colide com outro objeto (Ex. um projétil atinge o jogador, destruindo o projétil, e causando dano). A colisão pode ser desligada (os objetos atravessam entre si) caso o retorno desta função seja ```False```. Por padrão, sempre retorne ```True``` no final deste método

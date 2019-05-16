@@ -71,66 +71,63 @@ class World:
 
                         if body.shape == 'rect':
                             #NÃO FUNCIONA
-                            if body2.shape == 'circle':
-                                if self.checkCollisionAABBCircle(body, body2):
-                                    body.position = lastPos
-                                    body.velocity = pygame.math.Vector2(0, 0)
-                                    body.position += body.velocity
-                                    break
+                            #if body2.shape == 'circle':
+                            #    if self.checkCollisionAABBCircle(body, body2):
+                            #        body.position = lastPos
+                            #       body.velocity = pygame.math.Vector2(0, 0)
+                            #        body.position += body.velocity
+                            #        break
 
                             if body2.shape == 'rect':
                                 c = self.checkCollisionAABB(body, body2)
                                 if isinstance(c, tuple) :
-                                    body.position = lastPos
+                                    if body.collide(body2):
+                                        body.position = lastPos
 
-                                    print(c)
+                                        if(abs(c[0]) > abs(c[1])):
+                                            if(c[0] > 0):
+                                                body.position.x = body2.position.x + body2.size.x/2 + body.size.x/2
+                                                body.velocity.x = 0
+                                            else:
+                                                body.position.x = body2.position.x - body2.size.x/2 - body.size.x/2
+                                                body.velocity.x = 0
+                                        elif(abs(c[0]) < abs(c[1])):
+                                            if(c[1] > 0):
+                                                body.position.y = body2.position.y + body2.size.y/2 + body.size.y/2
+                                                body.velocity.y = 0
+                                            else:
+                                                body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
+                                                body.velocity.y = 0
 
-                                    if(abs(c[0]) > abs(c[1])):
-                                        if(c[0] > 0):
-                                            body.position.x = body2.position.x + body2.size.x/2 + body.size.x/2
-                                            body.velocity.x = 0
-                                        else:
-                                            body.position.x = body2.position.x - body2.size.x/2 - body.size.x/2
-                                            body.velocity.x = 0
-                                    elif(abs(c[0]) < abs(c[1])):
-                                        if(c[1] > 0):
-                                            body.position.y = body2.position.y + body2.size.y/2 + body.size.y/2
-                                            body.velocity.y = 0
-                                        else:
-                                            body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
-                                            body.velocity.y = 0
+                                        body.position += body.velocity
+                                        break
 
-                                    body.position += body.velocity
+                        #QUEBRADO
+                        #elif body.shape == 'circle':
+                        #    if body2.shape == 'circle':
+                        #        c = self.checkCollisionCircle(body, body2)
+                        #        if isinstance(c, pygame.Vector2):
+                        #            body.position = lastPos
+                        #            
+                        #            t = self.termsOf(body.velocity, c)
+                        #            #Limpa
+                        #            t.y = 0#
 
-                                    break
+                        #            #Transforma de volta
+                        #            v = self.termsOf(pygame.Vector2(1, 0), c)
+                        #            t = self.termsOf(t, v)
+                        #            body.velocity = t#
+                        #
+                        #            #body.position += body.velocity
+                        #            break
 
-                        elif body.shape == 'circle':
-                            if body2.shape == 'circle':
-                                c = self.checkCollisionCircle(body, body2)
-                                if isinstance(c, pygame.Vector2):
-                                    body.position = lastPos
-                                    
-                                    t = self.termsOf(body.velocity, c)
-                                    #Limpa
-
-                                    t.y = 0
-
-                                    #Transforma de volta
-                                    v = self.termsOf(pygame.Vector2(1, 0), c)
-                                    t = self.termsOf(t, v)
-                                    
-                                    body.velocity = t
-
-                                    #body.position += body.velocity
-                                    break
-
-                            #NÃO FUNCIONA
-                            if body2.shape == 'rect':
-                                if self.checkCollisionAABBCircle(body2, body):
-                                    body.position = lastPos
-                                    body.velocity = pygame.math.Vector2(0, 0)
-                                    body.position += body.velocity
-                                    break
+                        #    #NÃO FUNCIONA
+                        #    if body2.shape == 'rect':
+                        #        if self.checkCollisionAABBCircle(body2, body):
+                        #            body.position = lastPos
+                        #            body.velocity = pygame.math.Vector2(0, 0)
+                        #            body.position += body.velocity
+                        #            break
                             
 
         pass

@@ -29,4 +29,7 @@ class Body:
         elif self.shape == 'circle':
             renderer.drawCircle(int(self.position.x), int(self.position.y), int(self.size))
 
+    def collide(self, other):
+        return True
+
     
