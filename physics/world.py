@@ -84,20 +84,50 @@ class World:
                                     if body.collide(body2):
                                         body.position = lastPos
 
-                                        if(abs(c[0]) > abs(c[1])):
-                                            if(c[0] > 0):
+                                        dx = min(abs(body.minX() - body2.maxX()), abs(body2.minX() - body.maxX()))
+                                        dy = min(abs(body.minY() - body2.maxY()), abs(body2.minY() - body.maxY()))
+    
+
+                                        if dx < dy:
+                                            if abs(body.minX() - body2.maxX()) < abs(body2.minX() - body.maxX()):
+                                                #Direita
                                                 body.position.x = body2.position.x + body2.size.x/2 + body.size.x/2
                                                 body.velocity.x = 0
                                             else:
+                                                #Esquerda
                                                 body.position.x = body2.position.x - body2.size.x/2 - body.size.x/2
                                                 body.velocity.x = 0
-                                        elif(abs(c[0]) < abs(c[1])):
-                                            if(c[1] > 0):
+
+                                        elif dx > dy:
+                                            if abs(body.minY() - body2.maxY()) < abs(body2.minY() - body.maxY()):
+                                                #Cima
                                                 body.position.y = body2.position.y + body2.size.y/2 + body.size.y/2
                                                 body.velocity.y = 0
                                             else:
+                                                #Baixo
                                                 body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
                                                 body.velocity.y = 0
+                                        else:
+                                            print("Colidindo no canto")
+
+                                        if(abs(c[0]) > abs(c[1])):
+                                            if(c[0] > 0):
+                                                pass
+                                                #body.position.x = body2.position.x + body2.size.x/2 + body.size.x/2
+                                                #body.velocity.x = 0
+                                            else:
+                                                pass
+                                                #body.position.x = body2.position.x - body2.size.x/2 - body.size.x/2
+                                                #body.velocity.x = 0
+                                        elif(abs(c[0]) < abs(c[1])):
+                                            if(c[1] > 0):
+                                                pass
+                                                #body.position.y = body2.position.y + body2.size.y/2 + body.size.y/2
+                                                #body.velocity.y = 0
+                                            else:
+                                                pass
+                                                #body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
+                                                #body.velocity.y = 0
 
                                         body.position += body.velocity
                                         break

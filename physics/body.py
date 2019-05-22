@@ -32,4 +32,14 @@ class Body:
     def collide(self, other):
         return True
 
+    def minX(self):
+        return self.position.x - self.size.x/2
+
+    def maxX(self):
+        return self.position.x + self.size.x/2
+
+    def minY(self):
+        return self.position.y - self.size.y/2
     
+    def maxY(self):
+        return self.position.y + self.size.y/2
