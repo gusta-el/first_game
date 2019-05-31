@@ -5,12 +5,7 @@ class World:
     def __init__(self, gravity):
         self.gravity = gravity
         self.bodies = []
-
-
-
-        print("Teste, representando 10, 4 em termos de (1, 0)")
-        print(self.termsOf(pygame.Vector2(10, 4), pygame.Vector2(1, 0)))
-
+        
     #TODO: Tem que ver a formula
     def checkCollisionAABBCircle(self, aabb, circle):
         rect = pygame.Rect(aabb.position.x - aabb.size.x/2, aabb.position.y - aabb.size.y/2, aabb.size.x, aabb.size.y)
