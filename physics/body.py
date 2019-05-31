@@ -1,7 +1,8 @@
 import pygame
 from pygame.math import Vector2
+from objects.gameobject import GameObject
 
-class Body:
+class Body(GameObject):
 
     #Position -> pygame.Vector2()
     #Shape -> 'rect' ou 'circle'
@@ -9,6 +10,7 @@ class Body:
     #BodyType -> 'static' ou 'dynamic'
 
     def __init__(self, position, shape, size, bodyType):
+        super().__init__()
         self.position = position
         self.velocity = Vector2(0, 0)
         self.shape = shape
@@ -19,6 +21,9 @@ class Body:
             print("ERRO, corpo não pode ser do formato '" + self.shape + "', deve ser 'rect' ou 'circle'")
 
     def render(self, renderer):
+        pass
+
+    def debug_render(self, renderer):
         if self.bodyType == 'static':
             renderer.setColor(150, 0, 0, 255)
         elif self.bodyType == 'dynamic':
@@ -31,6 +36,12 @@ class Body:
 
     def collide(self, other):
         return True
+
+    def input(self, event):
+        pass
+
+    def update(self, delta):
+        pass
 
     def minX(self):
         return self.position.x - self.size.x/2

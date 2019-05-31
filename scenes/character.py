@@ -1,12 +1,12 @@
 import pygame
-import pygame
 from pygame.math import Vector2
 from physics.body import Body
+from objects.gameobject import GameObject
 
 class Player(Body):
 
     def __init__(self, position):
-        super().__init__(position, 'rect', pygame.Vector2(50, 50), 'dynamic')
+        super().__init__(position, 'rect', pygame.Vector2(50, 14), 'dynamic')
         self.texture = pygame.image.load("res/character.png")
 
         self.control = False
@@ -21,10 +21,11 @@ class Player(Body):
         if self.control:
             renderer.camera_pos += (self.position - renderer.camera_pos) / 5
 
-        renderer.drawTexture(self.texture, self.position.x, self.position.y, 64, 64)
+        renderer.drawTexture(self.texture, self.position.x, self.position.y - 14, 64, 64)
         super().render(renderer)
 
     def update(self, delta):
+        self.z = self.position.y
         if (self.hor != 0 or self.ver != 0) and self.control:
             tvel = Vector2(self.hor, self.ver).normalize() * self.speed
         else: tvel = Vector2(0, 0)

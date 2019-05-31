@@ -82,7 +82,6 @@ class World:
                                         dx = min(abs(body.minX() - body2.maxX()), abs(body2.minX() - body.maxX()))
                                         dy = min(abs(body.minY() - body2.maxY()), abs(body2.minY() - body.maxY()))
     
-
                                         if dx < dy:
                                             if abs(body.minX() - body2.maxX()) < abs(body2.minX() - body.maxX()):
                                                 #Direita
@@ -125,7 +124,6 @@ class World:
                                                 #body.velocity.y = 0
 
                                         body.position += body.velocity
-                                        break
 
                         #QUEBRADO
                         #elif body.shape == 'circle':
@@ -182,5 +180,5 @@ class World:
 
     def render(self, renderer):
         for body in self.bodies:
-            body.render(renderer)
+            body.debug_render(renderer)
         pass
