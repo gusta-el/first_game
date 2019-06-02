@@ -82,6 +82,14 @@ class MenuScene(Scene):
 
     def input(self, event):
         
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
+            if self.selection == self.start:
+                self.manager.changeState(1)
+            if self.selection == self.options:
+                self.manager.changeState(2)
+            if self.selection == self.credits:
+                self.manager.changeState(3)
+
         if not self.outro:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:

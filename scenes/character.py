@@ -100,4 +100,3 @@ class Player(Body):
                     else:
                         self.ver = 0
         pass
-

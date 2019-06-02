@@ -13,11 +13,12 @@ class DefaultScene(Scene):
 
         self.objects = []
 
-        self.character1 = Player(pygame.Vector2(780, 580))
+        self.character1 = Player(pygame.Vector2(860, 580))
+        self.character2 = Player(pygame.Vector2(730, 580))
 
         self.objects.append(self.character1)
-
-        #self.character2 = Player(pygame.Vector2(0, 100))
+        self.objects.append(self.character2)
+        
         self.world = World(Vector2(0, 0))
 
         self.tiledmap = TiledMap('res/mapas/casita.tmx')
@@ -26,19 +27,22 @@ class DefaultScene(Scene):
         self.character1.control = True
 
         self.world.addBody(self.character1)
-        #self.world.addBody(self.character2)
+        self.world.addBody(self.character2)
         pass
 
     def input(self, event):
         for obj in self.objects:
             obj.input(event)
-
+        
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                self.character1.control = not self.character1.control
-                #self.character2.control = not self.character2.control
+                if self.character1.control == True:
+                    self.character1.control = False
+                    self.character2.control = True
+                else:
+                    self.character1.control = True
+                    self.character2.control = False    
         pass
-
 
     def update(self, delta):
         for obj in self.objects:
