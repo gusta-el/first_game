@@ -58,7 +58,7 @@ class World:
     def update(self, delta):
         for body in self.bodies:
             lastPos = pygame.math.Vector2(body.position)
-            body.position += body.velocity
+            body.position += body.velocity * delta * 100
 
             if len(self.bodies) > 1 and body.bodyType == 'dynamic':
                 for  body2 in self.bodies:
@@ -123,7 +123,7 @@ class World:
                                                 #body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
                                                 #body.velocity.y = 0
 
-                                        body.position += body.velocity
+                                        body.position += body.velocity * delta * 100
 
                         #QUEBRADO
                         #elif body.shape == 'circle':

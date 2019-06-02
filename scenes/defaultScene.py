@@ -58,5 +58,5 @@ class DefaultScene(Scene):
         for obj in self.objects:
             obj.render(renderer)
 
-        self.world.render(renderer)
+        #self.world.render(renderer)
         pass

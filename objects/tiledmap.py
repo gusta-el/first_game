@@ -13,7 +13,11 @@ class TiledMap:
         for layer in self.tiled_map.layers:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, image in layer.tiles():
-                    renderer.drawTexture(image, x*32, y*32, 32, 32)
+                    #Checa se de fato o tile ta na tela
+                    proj = renderer.project(pygame.Vector2(x*32, y*32))
+                    if(proj.x >= -16 and proj.x <= pygame.screen_size[0] + 16):
+                        if(proj.y >= -16 and proj.y <= pygame.screen_size[1] + 16):
+                            renderer.drawTexture(image, x*32, y*32, 32, 32)
 
     def addBodies(self, world, objectList):
         for layer in self.tiled_map.layers:
