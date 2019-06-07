@@ -13,8 +13,10 @@ class DefaultScene(Scene):
 
         self.objects = []
 
-        self.character1 = Player(pygame.Vector2(860, 580))
-        self.character2 = Player(pygame.Vector2(730, 580))
+        self.character1 = Player(pygame.Vector2(860, 580), self)
+        self.character2 = Player(pygame.Vector2(730, 580), self)
+
+        self.currentCharacter = self.character1
 
         self.objects.append(self.character1)
         self.objects.append(self.character2)
@@ -23,6 +25,7 @@ class DefaultScene(Scene):
 
         self.tiledmap = TiledMap('res/mapas/casita.tmx')
         self.tiledmap.addBodies(self.world, self.objects)
+        self.tiledmap.loadConcertos(self.objects, self)
 
         self.character1.control = True
 
@@ -39,10 +42,15 @@ class DefaultScene(Scene):
                 if self.character1.control == True:
                     self.character1.control = False
                     self.character2.control = True
+                    self.currentCharacter = self.character2
                 else:
                     self.character1.control = True
                     self.character2.control = False    
+                    self.currentCharacter = self.character1
         pass
+
+    def removeObject(self, object):
+        self.objects.remove(object)
 
     def update(self, delta):
         for obj in self.objects:

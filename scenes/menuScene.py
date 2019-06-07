@@ -59,6 +59,7 @@ class MenuScene(Scene):
                     self.manager.changeState(1)
                     pass #Muda pra tela de jogo
                 elif self.selection == self.options:
+                    self.manager.changeState(2)
                     pass #Muda pra tela de opções
                 elif self.selection == self.credits:
                     pass #Muda pra tela de créditos
@@ -102,7 +103,7 @@ class MenuScene(Scene):
                         self.selection = self.start
                     elif self.selection == self.credits:
                         self.selection = self.options
-                if event.key == pygame.K_KP_ENTER:
+                if event.key == pygame.K_k:
                     self.outro = True
                     self.intro = False
         pass

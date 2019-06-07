@@ -3,11 +3,27 @@ import pytmx
 from pytmx.util_pygame import load_pygame
 from physics.body import Body
 from objects.mapProps import MapProp
+from objects.concerto import Concerto
+from objects.ferramenta import Ferramenta
 
 class TiledMap:
 
     def __init__(self, map_url):
         self.tiled_map = load_pygame(map_url)
+
+    def loadConcertos(self, objectList, defaultScene):
+        for layer in self.tiled_map.layers:
+            if isinstance(layer, pytmx.TiledObjectGroup):
+                for obj in layer:
+                    if obj.image != None and obj.type != None:
+                        if obj.type.startswith("c_"):
+                            c = Concerto(obj)
+                            objectList.append(c)
+                        if obj.type.startswith("f_"):
+                            f = Ferramenta(obj, defaultScene)
+                            objectList.append(f)
+
+
 
     def render(self, renderer):
         for layer in self.tiled_map.layers:
@@ -26,7 +42,7 @@ class TiledMap:
                     if obj.type == "block":
                         b = Body(pygame.Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), 'rect', pygame.Vector2(obj.width, obj.height), 'static')
                         world.addBody(b)
-                    elif obj.image != None:
+                    elif obj.image != None and obj.type == "":
                         b = MapProp(pygame.Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), obj.image)
                         objectList.append(b)
                         pass

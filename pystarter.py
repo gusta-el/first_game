@@ -1,18 +1,18 @@
 import sys, pygame, time
 from manager import Manager
 from renderer import Renderer
-#from screeninfo import get_monitors
+from screeninfo import get_monitors
 
 pygame.init()
 pygame.font.init()
-size = width, height = 700,700 #get_monitors()[0].width, get_monitors()[0].height
+size = width, height = get_monitors()[0].width, get_monitors()[0].height
 
 pygame.screen_size = size
 
 #Game attributes
 fps = 60
 target = 1/fps
-screen = pygame.display.set_mode(size)#, pygame.FULLSCREEN)
+screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
 delta = 1/fps
 fillColor = (0, 0, 0)
 drawFps = True
@@ -23,13 +23,22 @@ manager.start()
 
 renderer = Renderer(screen)
 
-while 1:
+running = True
+
+while running:
     #Game Loop
     init = time.time()
 
     #Inputs
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_F4 | pygame.KMOD_LALT:
+                sys.exit()
+                running = False
+
+        if event.type == pygame.QUIT:
+            sys.exit()
+            running = False
         manager.input(event)    
 
     #Screen Render

@@ -3,14 +3,17 @@ from pygame.math import Vector2
 from physics.body import Body
 from objects.gameobject import GameObject
 from objects.animation import Animation
+from objects.ferramenta import Ferramenta
 
 class Player(Body):
 
-    def __init__(self, position):
+    def __init__(self, position, defaultScene):
         super().__init__(position, 'rect', pygame.Vector2(25, 14), 'dynamic')
         self.texture = pygame.image.load("res/personagem_gordo.png")
         self.anim_timer = 0
         self.control = False
+        self.ferramenta = None
+        self.defaultScene = defaultScene
 
         #63 x 128
 
@@ -36,7 +39,7 @@ class Player(Body):
 
     def render(self, renderer):
         if self.control:
-            renderer.camera_pos += (self.position - renderer.camera_pos) / 5
+            renderer.camera_pos += (self.position - renderer.camera_pos) / 10
 
         f = self.anim_curr.getFrame(self.anim_timer if self.velocity.length() > 1 else 0)
         renderer.drawTexture(f, self.position.x, self.position.y - 30, scale=0.6)
@@ -49,6 +52,7 @@ class Player(Body):
             tvel = Vector2(self.hor, self.ver).normalize() * self.speed
         else: tvel = Vector2(0, 0)
         self.velocity += (tvel - self.velocity) / 5
+        
 
         ang = self.velocity.angle_to(pygame.Vector2(1, 0))
         if ang < 45 and ang > -45:
@@ -68,6 +72,21 @@ class Player(Body):
 
     def input(self, event):
         if(self.control):
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_x:
+                    if self.ferramenta != None:
+                        
+                        self.ferramenta.x = self.position.x
+                        self.ferramenta.y = self.position.y
+
+                        f = Ferramenta(self.ferramenta, self.defaultScene)
+
+                        self.defaultScene.objects.append(f)
+                        self.ferramenta = None
+
+
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.hor = -1

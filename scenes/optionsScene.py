@@ -6,10 +6,10 @@ from scenes.scene import Scene
 class OptionScene(Scene):
 
     def __init__(self, manager):
-        self.manager = manager
+        super().__init__(manager)
 
     def start(self):
-        self.menu_op = pygame.image.load("res/op_scene.jpg")
+        self.menu_op = pygame.image.load("res/op_scene.png")
         pass
 
     def input(self, event):
@@ -19,5 +19,7 @@ class OptionScene(Scene):
         pass
 
     def render(self, renderer):
+        renderer.camera_pos = pygame.Vector2(0, 0)
+        renderer.drawTexture(self.menu_op, 0, 0, pygame.screen_size[0], pygame.screen_size[1])
         pass
 
