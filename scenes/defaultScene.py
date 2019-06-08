@@ -6,6 +6,8 @@ from physics.world import World
 from physics.body import Body
 from objects.tiledmap import TiledMap
 from objects.gameobject import GameObject
+from objects.particle import Particle
+import random
 
 class DefaultScene(Scene):
 
@@ -20,6 +22,8 @@ class DefaultScene(Scene):
 
         self.objects.append(self.character1)
         self.objects.append(self.character2)
+
+        self.particles = []
         
         self.world = World(Vector2(0, 0))
 
@@ -52,7 +56,13 @@ class DefaultScene(Scene):
     def removeObject(self, object):
         self.objects.remove(object)
 
+    def addParticle(self, position, cor):
+        vel = Vector2(random.random() * 2 - 1, random.random() * 2 - 1).normalize() * 1
+        p = Particle(position, vel, Vector2(0, 0), random.randrange(3, 5), cor, self)
+        self.objects.append(p)
+
     def update(self, delta):
+
         for obj in self.objects:
             obj.update(delta)
 
@@ -67,8 +77,10 @@ class DefaultScene(Scene):
 
         self.objects.sort(key = self.sortZ)
 
+        renderer.startShape()
         for obj in self.objects:
             obj.render(renderer)
+        renderer.endShape()
 
         #self.world.render(renderer)
         pass

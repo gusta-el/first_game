@@ -74,11 +74,16 @@ class MenuScene(Scene):
 
         #Desenha os botões de menu
         renderer.setColor(255, 0, 0, 255)
+        renderer.startShape()
         renderer.drawRect(self.tweenSelection["x"], self.tweenSelection["y"], self.tweenSelection["width"], self.tweenSelection["height"])
+        renderer.endShape()
 
         #Desenha o fade in/out
+        renderer.startShape()
         renderer.setColor(0, 0, 0, int(self.alpha * 255))
         renderer.fillRect(0, 0, self.screen_size.x, self.screen_size.y)
+        renderer.endShape()
+
         pass
 
     def input(self, event):

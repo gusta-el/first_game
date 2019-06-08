@@ -1,4 +1,5 @@
 import pygame
+import math
 from pygame.math import Vector2
 from physics.body import Body
 from objects.gameobject import GameObject
@@ -14,6 +15,14 @@ class Player(Body):
         self.control = False
         self.ferramenta = None
         self.defaultScene = defaultScene
+
+        self.acting = False
+
+        #Images de icones de ferramentas
+        self.icon_cimento = pygame.image.load("res/cimento_icon.png")
+        self.icon_chave_inglesa = pygame.image.load("res/inglesa_icon.png")
+        self.icon_chave_de_fenda = pygame.image.load("res/fenda_icon.png")
+        self.icon_martelo = pygame.image.load("res/martelo_icon.png")
 
         #63 x 128
 
@@ -43,6 +52,21 @@ class Player(Body):
 
         f = self.anim_curr.getFrame(self.anim_timer if self.velocity.length() > 1 else 0)
         renderer.drawTexture(f, self.position.x, self.position.y - 30, scale=0.6)
+
+        if self.ferramenta != None:
+            ico = None
+            if self.ferramenta.type == "f_cimento":
+                ico = self.icon_cimento
+            elif self.ferramenta.type == "f_chave_inglesa":
+                ico = self.icon_chave_inglesa
+            elif self.ferramenta.type == "f_chave_de_fenda":
+                ico = self.icon_chave_de_fenda
+            elif self.ferramenta.type == "f_martelo":
+                ico = self.icon_martelo
+
+            if ico != None:
+                renderer.drawTexture(ico, self.position.x, self.position.y - 100, scale=math.sin(self.anim_timer*3) * 0.1 + 1)
+
         super().render(renderer)
 
     def update(self, delta):
@@ -68,26 +92,22 @@ class Player(Body):
             #Down: < -45 and > -135
             self.anim_curr = self.anim_down
 
-        print()
-
     def input(self, event):
         if(self.control):
 
             if event.type == pygame.KEYDOWN:
+                if event.key ==  pygame.K_z:
+                    self.acting = True
+
                 if event.key == pygame.K_x:
                     if self.ferramenta != None:
                         
                         self.ferramenta.x = self.position.x
                         self.ferramenta.y = self.position.y
-
                         f = Ferramenta(self.ferramenta, self.defaultScene)
-
                         self.defaultScene.objects.append(f)
                         self.ferramenta = None
 
-
-
-            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.hor = -1
                 elif event.key == pygame.K_RIGHT:
@@ -98,6 +118,9 @@ class Player(Body):
                     self.ver = 1
 
             if event.type == pygame.KEYUP:
+                if event.key ==  pygame.K_z:
+                    self.acting = False
+
                 if event.key == pygame.K_LEFT:
                     if pygame.key.get_pressed()[pygame.K_RIGHT]:
                         self.hor = 1

@@ -102,8 +102,7 @@ class World:
                                                 body.position.y = body2.position.y - body2.size.y/2 - body.size.y/2
                                                 body.velocity.y = 0
                                         else:
-                                            print("Colidindo no canto")
-
+                                            pass
                                         if(abs(c[0]) > abs(c[1])):
                                             if(c[0] > 0):
                                                 pass
@@ -159,7 +158,6 @@ class World:
     def termsOf(self, vec, term):
         cd = term.rotate(90)
 
-        print("Termo " + str(term) + ", vetor perp " + str(cd))
 
         x = term.x
         y = term.y
@@ -169,9 +167,7 @@ class World:
         s = vec.y
 
         a = (r + (s*xd/(yd-y) - (r*xd*y/(x*yd - x*y))))/x
-        print("a: " + str(a))
         b = (s*x - r*y)/(x*yd-x*y)
-        print("b: " + str(b))
 
         return pygame.Vector2(a, b)
 

@@ -7,6 +7,8 @@ class Renderer:
         self.color = pygame.Color(255, 255, 255, 1)
         self.camera_pos = pygame.Vector2(0, 0)
         self.font = pygame.font.SysFont('Comic Sans MS', 15)
+        self.shape_surface = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
+
 
     def drawText(self, text, x, y):
         s = self.font.render(text, False, self.color)
@@ -27,11 +29,15 @@ class Renderer:
                 position.y + self.camera_pos.y - pygame.screen_size[1]//2
                 )
 
+    def startShape(self):
+        self.shape_surface.fill(pygame.Color(0, 0, 0, 0))
+
+    def endShape(self):
+        self.screen.blit(self.shape_surface, (0, 0))
 
     def drawLine(self, x1, y1, x2, y2):
-        s = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
-        s.set_alpha(self.color.a)
-        pygame.draw.line(s, self.color,
+        #self.shape_surface.set_alpha(self.color.a)
+        pygame.draw.line(self.shape_surface, self.color,
         (
             x1 - self.camera_pos.x + pygame.screen_size[0]//2,
             y1 - self.camera_pos.y + pygame.screen_size[1]//2
@@ -39,43 +45,34 @@ class Renderer:
             x2 - self.camera_pos.x + pygame.screen_size[0]//2,
             y2 - self.camera_pos.y + pygame.screen_size[1]//2
         ))
-        self.screen.blit(s, (0, 0))
 
     def drawRect(self, x, y, w, h):
-        s = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
-        s.set_alpha(self.color.a)
-        pygame.draw.rect(s, self.color, pygame.Rect(
+        #self.shape_surface.set_alpha(self.color.a)
+        pygame.draw.rect(self.shape_surface, self.color, pygame.Rect(
             x - self.camera_pos.x + pygame.screen_size[0]//2,
             y - self.camera_pos.y + pygame.screen_size[1]//2,
             w, h), 2)
-        self.screen.blit(s, (0, 0))
 
     def fillRect(self, x, y, w, h):
-        s = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
-        s.set_alpha(self.color.a)
-        pygame.draw.rect(s, self.color, pygame.Rect(
+        #self.shape_surface.set_alpha(self.color.a)
+        pygame.draw.rect(self.shape_surface, self.color, pygame.Rect(
             x - self.camera_pos.x + pygame.screen_size[0]//2,
             y - self.camera_pos.y + pygame.screen_size[1]//2,
             w, h), 0)
-        self.screen.blit(s, (0, 0))
 
     def drawCircle(self, x, y, radius):
-        s = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
-        s.set_alpha(self.color.a)
-        pygame.draw.circle(s, self.color, (
+        #self.shape_surface.set_alpha(self.color.a)
+        pygame.draw.circle(self.shape_surface, self.color, (
             x - self.camera_pos.x + pygame.screen_size[0]//2,
             y - self.camera_pos.y + pygame.screen_size[1]//2
             ), radius, 1)
-        self.screen.blit(s, (0, 0))
 
     def fillCircle(self, x, y, radius):
-        s = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
-        s.set_alpha(self.color.a)
-        pygame.draw.circle(s, self.color, (
-            x - self.camera_pos.x + pygame.screen_size[0]//2,
-            y - self.camera_pos.y + pygame.screen_size[1]//2
+        #self.shape_surface.set_alpha(self.color.a)
+        pygame.draw.circle(self.shape_surface, self.color, (
+            int(x - self.camera_pos.x + pygame.screen_size[0]//2),
+            int(y - self.camera_pos.y + pygame.screen_size[1]//2)
             ), radius, 0)
-        self.screen.blit(s, (0, 0))
 
     def setColor(self, r, g, b, a):
         self.color = pygame.Color(r, g, b, a)

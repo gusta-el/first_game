@@ -16,10 +16,10 @@ class TiledMap:
             if isinstance(layer, pytmx.TiledObjectGroup):
                 for obj in layer:
                     if obj.image != None and obj.type != None:
-                        if obj.type.startswith("c_"):
-                            c = Concerto(obj)
+                        if obj.type[:2] == "c_":
+                            c = Concerto(obj, defaultScene)
                             objectList.append(c)
-                        if obj.type.startswith("f_"):
+                        if obj.type[:2] == "f_":
                             f = Ferramenta(obj, defaultScene)
                             objectList.append(f)
 
