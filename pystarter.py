@@ -1,18 +1,18 @@
 import sys, pygame, time
 from manager import Manager
 from renderer import Renderer
-from screeninfo import get_monitors
+#from screeninfo import get_monitors
 
 pygame.init()
 pygame.font.init()
-size = width, height = get_monitors()[0].width, get_monitors()[0].height
+size = width, height = (800,600)#get_monitors()[0].width, get_monitors()[0].height
 
 pygame.screen_size = size
 
 #Game attributes
 fps = 60
 target = 1/fps
-screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
+screen = pygame.display.set_mode(size)#, pygame.FULLSCREEN)
 delta = 1/fps
 fillColor = (0, 0, 0)
 drawFps = True
@@ -49,7 +49,7 @@ while running:
     #Fps debug
     if drawFps:
         renderer.setColor(255, 255, 255, 255)
-        renderer.drawText("FPS:" + str(int(1/delta)), 10, 10)
+        #renderer.drawText("FPS:" + str(int(1/delta)), 10, 10)
     pygame.display.flip()
 
     #Loop sleep

@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 from pygame.math import Vector2
 from scenes.scene import Scene
 from scenes.character import Player
@@ -7,19 +7,20 @@ from physics.body import Body
 from objects.tiledmap import TiledMap
 from objects.gameobject import GameObject
 from objects.particle import Particle
+from datetime import datetime
 import random
 
 class DefaultScene(Scene):
 
     def start(self):
-
+        self.deadline_time = 60
+        self.initial_time  = datetime.now().time()
+        
         self.objects = []
-
-        self.character1 = Player(pygame.Vector2(860, 580), self)
-        self.character2 = Player(pygame.Vector2(730, 580), self)
+        self.character1 = Player(pygame.Vector2(860, 580), self,1)
+        self.character2 = Player(pygame.Vector2(730, 580), self,2)
 
         self.currentCharacter = self.character1
-
         self.objects.append(self.character1)
         self.objects.append(self.character2)
 
@@ -31,10 +32,12 @@ class DefaultScene(Scene):
         self.tiledmap.addBodies(self.world, self.objects)
         self.tiledmap.loadConcertos(self.objects, self)
 
-        self.character1.control = True
-
         self.world.addBody(self.character1)
         self.world.addBody(self.character2)
+        
+        self.character1.control = True
+
+        self.score = 0
         pass
 
     def input(self, event):
@@ -61,12 +64,18 @@ class DefaultScene(Scene):
         p = Particle(position, vel, Vector2(0, 0), random.randrange(3, 5), cor, self)
         self.objects.append(p)
 
-    def update(self, delta):
-
+    def update(self, delta):        
+        
         for obj in self.objects:
             obj.update(delta)
 
         self.world.update(delta)
+
+        tempo_inicial = (self.initial_time.hour * 60 * 60) + (self.initial_time.minute * 60) + self.initial_time.second
+        tempo_atual = (datetime.now().time().hour * 60 * 60) + (datetime.now().time().minute * 60) + datetime.now().time().second
+
+        if (self.deadline_time - (tempo_atual - tempo_inicial)) == 0:
+            self.manager.changeState(3)
         pass
 
     def sortZ(self, val):
@@ -81,6 +90,17 @@ class DefaultScene(Scene):
         for obj in self.objects:
             obj.render(renderer)
         renderer.endShape()
-
         #self.world.render(renderer)
+
+        renderer.drawText("PONTUAÇÃO", 70, 10)
+        renderer.drawText(str(self.score) , 110, 25)
+        
+        renderer.drawText("TEMPO", 320, 10)
+        tempo_inicial = (self.initial_time.hour * 60 * 60) + (self.initial_time.minute * 60) + self.initial_time.second
+        tempo_atual = (datetime.now().time().hour * 60 * 60) + (datetime.now().time().minute * 60) + datetime.now().time().second
+
+        if (self.deadline_time - (tempo_atual - tempo_inicial)) < 5:
+            renderer.drawText(str(self.deadline_time - (tempo_atual - tempo_inicial)), 340, 25, pygame.Color(255, 0, 0, 1))
+        else: 
+            renderer.drawText(str(self.deadline_time - (tempo_atual - tempo_inicial)), 340, 25)
         pass

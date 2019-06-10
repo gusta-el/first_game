@@ -9,9 +9,21 @@ class Renderer:
         self.font = pygame.font.SysFont('Comic Sans MS', 15)
         self.shape_surface = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
 
+    def produceSound(self,sound):
+        crash_sound = pygame.mixer.Sound("res/sounds/" + sound + ".wav")
+        pygame.mixer.Sound.play(crash_sound)
 
-    def drawText(self, text, x, y):
-        s = self.font.render(text, False, self.color)
+    def drawText(self, text, x, y, color=None):
+        if color == None:
+            s = self.font.render(text, False, self.color)
+        else:
+            s = self.font.render(text, False, color)
+        s.set_alpha(self.color.a)
+        self.screen.blit(s, (x, y))
+
+    def drawScoreAndTime(self, text, x, y):
+        self.color = pygame.Color(255, 255, 255, 1)
+        self.font = pygame.font.SysFont('Comic Sans MS', 15)
         s.set_alpha(self.color.a)
         self.screen.blit(s, (x, y))
 

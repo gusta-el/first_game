@@ -29,6 +29,8 @@ class Ferramenta(GameObject):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_z:
                 if self.close and self.defaultScene.currentCharacter.ferramenta == None:
+                    fixed = pygame.mixer.Sound("res/sounds/catchTool.wav")
+                    pygame.mixer.Sound.play(fixed)
                     self.defaultScene.currentCharacter.ferramenta = self.obj
                     self.defaultScene.removeObject(self)
         pass

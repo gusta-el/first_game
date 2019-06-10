@@ -8,9 +8,23 @@ from objects.ferramenta import Ferramenta
 
 class Player(Body):
 
-    def __init__(self, position, defaultScene):
+    def __init__(self, position, defaultScene,player):
         super().__init__(position, 'rect', pygame.Vector2(25, 14), 'dynamic')
-        self.texture = pygame.image.load("res/personagem_gordo.png")
+
+        f = [[], [], [], []]
+        if player == 1:
+            self.texture = pygame.image.load("res/personagem_gordo.png")
+            #63 x 128
+            for j in range(4):
+                for i in range(4):
+                    f[j].append(self.texture.subsurface(pygame.Rect(i * 63, j * 128, 63, 128)))
+        if player == 2:
+            self.texture = pygame.image.load("res/personagem_magro.png")
+            #63 x 128
+            for j in range(4):
+                for i in range(4):
+                    f[j].append(self.texture.subsurface(pygame.Rect(i * 62, j * 150, 62, 150)))
+
         self.anim_timer = 0
         self.control = False
         self.ferramenta = None
@@ -23,15 +37,6 @@ class Player(Body):
         self.icon_chave_inglesa = pygame.image.load("res/inglesa_icon.png")
         self.icon_chave_de_fenda = pygame.image.load("res/fenda_icon.png")
         self.icon_martelo = pygame.image.load("res/martelo_icon.png")
-
-        #63 x 128
-
-        f = [[], [], [], []]
-
-        for j in range(4):
-            for i in range(4):
-                f[j].append(self.texture.subsurface(pygame.Rect(i * 63, j * 128, 63, 128)))
-
         
         self.anim_down = Animation(f[0], 1/12)
         self.anim_left = Animation(f[1], 1/12)

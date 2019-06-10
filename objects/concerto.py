@@ -13,8 +13,7 @@ class Concerto(GameObject):
         self.fix = 0
 
     def update(self, delta):
-        self.z = self.obj.y - 16 + self.obj.height/2
-
+        self.z = self.obj.y - 16 + self.obj.height/2    
         
         if self.defaultScene.currentCharacter.ferramenta != None:
             if self.defaultScene.currentCharacter.ferramenta.type[2:] == self.obj.type[2:]:
@@ -28,6 +27,9 @@ class Concerto(GameObject):
                         cor = self.blue
                         if self.fix > 1:
                             self.defaultScene.removeObject(self)
+                            self.defaultScene.score += 1
+                            fixed = pygame.mixer.Sound("res/sounds/fixed.wav")
+                            pygame.mixer.Sound.play(fixed)
                 else:
                     self.fix = 0
 
@@ -37,6 +39,7 @@ class Concerto(GameObject):
 
     def render(self, renderer):
         renderer.drawTexture(self.obj.image, self.obj.x - 16 + self.obj.width/2, self.obj.y - 16 + self.obj.height/2)
+
         pass
 
     def input(self, event):

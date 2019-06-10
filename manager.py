@@ -2,6 +2,7 @@ import sys, pygame
 from scenes.defaultScene import DefaultScene
 from scenes.menuScene import MenuScene
 from scenes.optionsScene import OptionScene
+from scenes.gameOverScene import GameOverScene
 
 class Manager:
 
@@ -11,6 +12,7 @@ class Manager:
         self.all_scenes.append(MenuScene(self)) #0
         self.all_scenes.append(DefaultScene(self)) #1
         self.all_scenes.append(OptionScene(self)) #2
+        self.all_scenes.append(GameOverScene(self)) #3
 
     def changeState(self, index):
         self.index = index

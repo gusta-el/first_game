@@ -8,7 +8,6 @@ class MenuScene(Scene):
     def __init__(self, manager):
         super().__init__(manager)
 
-
     def start(self):
         self.menu_bg = pygame.image.load("res/menu_default.jpg")
         self.alpha = 1
@@ -62,6 +61,7 @@ class MenuScene(Scene):
                     self.manager.changeState(2)
                     pass #Muda pra tela de opções
                 elif self.selection == self.credits:
+                    self.manager.changeState(3)
                     pass #Muda pra tela de créditos
 
             
@@ -108,8 +108,6 @@ class MenuScene(Scene):
                         self.selection = self.start
                     elif self.selection == self.credits:
                         self.selection = self.options
-                if event.key == pygame.K_k:
-                    self.outro = True
-                    self.intro = False
+
         pass
 
