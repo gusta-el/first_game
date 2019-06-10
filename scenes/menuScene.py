@@ -18,11 +18,11 @@ class MenuScene(Scene):
         ry = self.screen_size.y / 843
 
         #Botões
-        self.start = Rect(585*rx, 390*ry, 154*rx, 50*ry)
+        self.start_r = Rect(585*rx, 390*ry, 154*rx, 50*ry)
         self.options = Rect(556*rx, 447*ry, 217*rx, 55*ry)
         self.credits = Rect(559*rx, 512*ry, 211*rx, 50*ry)
 
-        self.selection = self.start
+        self.selection = self.start_r
         self.tweenSelection = {
             "x": self.selection.x,
             "y": self.selection.y,
@@ -54,7 +54,7 @@ class MenuScene(Scene):
                 self.outro = False
                 #Terminou a outro
 
-                if self.selection == self.start:
+                if self.selection == self.start_r:
                     self.manager.changeState(1)
                     pass #Muda pra tela de jogo
                 elif self.selection == self.options:
@@ -89,7 +89,7 @@ class MenuScene(Scene):
     def input(self, event):
         
         if pygame.key.get_pressed()[pygame.K_SPACE]:
-            if self.selection == self.start:
+            if self.selection == self.start_r:
                 self.manager.changeState(1)
             if self.selection == self.options:
                 self.manager.changeState(2)
@@ -99,13 +99,13 @@ class MenuScene(Scene):
         if not self.outro:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    if self.selection == self.start:
+                    if self.selection == self.start_r:
                         self.selection = self.options
                     elif self.selection == self.options:
                         self.selection = self.credits
                 if event.key == pygame.K_UP:
                     if self.selection == self.options:
-                        self.selection = self.start
+                        self.selection = self.start_r
                     elif self.selection == self.credits:
                         self.selection = self.options
 

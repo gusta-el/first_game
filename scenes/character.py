@@ -9,7 +9,7 @@ from objects.ferramenta import Ferramenta
 class Player(Body):
 
     def __init__(self, position, defaultScene,player):
-        super().__init__(position, 'rect', pygame.Vector2(25, 14), 'dynamic')
+        super().__init__(position, 'rect', Vector2(25, 14), 'dynamic')
 
         f = [[], [], [], []]
         if player == 1:
@@ -83,7 +83,7 @@ class Player(Body):
         self.velocity += (tvel - self.velocity) / 5
         
 
-        ang = self.velocity.angle_to(pygame.Vector2(1, 0))
+        ang = self.velocity.angle_to(Vector2(1, 0))
         if ang < 45 and ang > -45:
             #Right: < 45 and > -45
             self.anim_curr = self.anim_right

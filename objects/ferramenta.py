@@ -1,6 +1,7 @@
 import pygame
 from objects.gameobject import GameObject
 import math
+from pygame.math import Vector2
 
 class Ferramenta(GameObject):
 
@@ -14,7 +15,7 @@ class Ferramenta(GameObject):
     def update(self, delta):
         self.timer += delta
         self.z = self.obj.y - 16 + self.obj.height/2
-        pos = pygame.Vector2(self.obj.x - 16 + self.obj.width/2, self.obj.y - 16 + self.obj.height/2)
+        pos = Vector2(self.obj.x - 16 + self.obj.width/2, self.obj.y - 16 + self.obj.height/2)
         self.close = (self.defaultScene.currentCharacter.position - pos).length() < 32
         pass
 

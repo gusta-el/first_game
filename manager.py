@@ -19,6 +19,7 @@ class Manager:
         self.start()
 
     def start(self):
+        print("Iniciando cena " + str(self.all_scenes[self.index]))
         self.all_scenes[self.index].start()
         pass
 

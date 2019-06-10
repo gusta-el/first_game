@@ -17,8 +17,8 @@ class DefaultScene(Scene):
         self.initial_time  = datetime.now().time()
         
         self.objects = []
-        self.character1 = Player(pygame.Vector2(860, 580), self,1)
-        self.character2 = Player(pygame.Vector2(730, 580), self,2)
+        self.character1 = Player(Vector2(860, 580), self,1)
+        self.character2 = Player(Vector2(730, 580), self,2)
 
         self.currentCharacter = self.character1
         self.objects.append(self.character1)
@@ -91,6 +91,7 @@ class DefaultScene(Scene):
             obj.render(renderer)
         renderer.endShape()
         #self.world.render(renderer)
+        renderer.setColor(255, 255, 255, 255)
 
         renderer.drawText("PONTUAÇÃO", 70, 10)
         renderer.drawText(str(self.score) , 110, 25)

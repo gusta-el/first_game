@@ -80,7 +80,7 @@ class GameOverScene(Scene):
 
     def render(self, renderer):
        
-        renderer.camera_pos = pygame.Vector2(0, 0)
+        renderer.camera_pos = Vector2(0, 0)
         renderer.drawTexture(self.gameOver, 0, 0, pygame.screen_size[0], pygame.screen_size[1])
 
         renderer.setColor(255, 0, 0, 255)

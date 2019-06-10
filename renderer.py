@@ -1,11 +1,12 @@
 import pygame, math
+from pygame.math import Vector2
 
 class Renderer:
     
     def __init__(self, screen):
         self.screen = screen
         self.color = pygame.Color(255, 255, 255, 1)
-        self.camera_pos = pygame.Vector2(0, 0)
+        self.camera_pos = Vector2(0, 0)
         self.font = pygame.font.SysFont('Comic Sans MS', 15)
         self.shape_surface = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
 
@@ -29,14 +30,14 @@ class Renderer:
 
     #World to screen
     def project(self, position):
-        return pygame.Vector2(
+        return Vector2(
                 position.x - self.camera_pos.x + pygame.screen_size[0]//2,
                 position.y - self.camera_pos.y + pygame.screen_size[1]//2
                 )
 
     #Screen to World
     def unproject(self, position):
-        return pygame.Vector2(
+        return Vector2(
                 position.x + self.camera_pos.x - pygame.screen_size[0]//2,
                 position.y + self.camera_pos.y - pygame.screen_size[1]//2
                 )

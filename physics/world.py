@@ -1,4 +1,5 @@
 import pygame, math
+from pygame.math import Vector2
 
 class World:
 
@@ -57,7 +58,7 @@ class World:
 
     def update(self, delta):
         for body in self.bodies:
-            lastPos = pygame.math.Vector2(body.position)
+            lastPos = Vector2(body.position)
             body.position += body.velocity * delta * 100
 
             if len(self.bodies) > 1 and body.bodyType == 'dynamic':
@@ -169,7 +170,7 @@ class World:
         a = (r + (s*xd/(yd-y) - (r*xd*y/(x*yd - x*y))))/x
         b = (s*x - r*y)/(x*yd-x*y)
 
-        return pygame.Vector2(a, b)
+        return Vector2(a, b)
 
     def addBody(self, body):
         self.bodies.append(body)

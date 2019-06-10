@@ -1,5 +1,6 @@
 import pygame
 import pytmx
+from pygame.math import Vector2
 from pytmx.util_pygame import load_pygame
 from physics.body import Body
 from objects.mapProps import MapProp
@@ -30,7 +31,7 @@ class TiledMap:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, image in layer.tiles():
                     #Checa se de fato o tile ta na tela
-                    proj = renderer.project(pygame.Vector2(x*32, y*32))
+                    proj = renderer.project(Vector2(x*32, y*32))
                     if(proj.x >= -16 and proj.x <= pygame.screen_size[0] + 16):
                         if(proj.y >= -16 and proj.y <= pygame.screen_size[1] + 16):
                             renderer.drawTexture(image, x*32, y*32, 32, 32)
@@ -40,9 +41,9 @@ class TiledMap:
             if isinstance(layer, pytmx.TiledObjectGroup):
                 for obj in layer:
                     if obj.type == "block":
-                        b = Body(pygame.Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), 'rect', pygame.Vector2(obj.width, obj.height), 'static')
+                        b = Body(Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), 'rect', Vector2(obj.width, obj.height), 'static')
                         world.addBody(b)
                     elif obj.image != None and obj.type == "":
-                        b = MapProp(pygame.Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), obj.image)
+                        b = MapProp(Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), obj.image)
                         objectList.append(b)
                         pass
