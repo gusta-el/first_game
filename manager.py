@@ -3,16 +3,20 @@ from scenes.defaultScene import DefaultScene
 from scenes.menuScene import MenuScene
 from scenes.optionsScene import OptionScene
 from scenes.gameOverScene import GameOverScene
+from scenes.levelSelectScene import LevelSelectScene
+from scenes.resultScene import ResultScene
 
 class Manager:
 
     def __init__(self):
-        self.all_scenes = []
-        self.index = 0
-        self.all_scenes.append(MenuScene(self)) #0
-        self.all_scenes.append(DefaultScene(self)) #1
-        self.all_scenes.append(OptionScene(self)) #2
-        self.all_scenes.append(GameOverScene(self)) #3
+        self.all_scenes = {}
+        self.index = "Menu"
+        self.all_scenes["Menu"] = MenuScene(self)
+        self.all_scenes["Game"] = DefaultScene(self)
+        self.all_scenes["Options"] = OptionScene(self)
+        self.all_scenes["GameOver"] = GameOverScene(self)
+        self.all_scenes["LevelSelect"] = LevelSelectScene(self)
+        self.all_scenes["Result"] = ResultScene(self)
 
     def changeState(self, index):
         self.index = index

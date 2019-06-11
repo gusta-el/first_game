@@ -37,9 +37,9 @@ class GameOverScene(Scene):
     def input(self, event):
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             if self.selection == self.tryAgain:
-                self.manager.changeState(1)
+                self.manager.changeState("Game")
             if self.selection == self.voltarMenu:
-                self.manager.changeState(0)
+                self.manager.changeState("Menu")
 
         if not self.outro:
             if event.type == pygame.KEYDOWN:
@@ -60,22 +60,22 @@ class GameOverScene(Scene):
         self.tweenSelection["height"] += (self.selection.height - self.tweenSelection["height"])/5
 
         if self.intro:
-            self.alpha -= 0.5 * delta
+            self.alpha -= delta
             if self.alpha <= 0:
                 self.alpha = 0
                 self.intro = False
                 #Terminou a intro
         elif self.outro:
-            self.alpha += 0.5 * delta
+            self.alpha += delta
             if self.alpha >= 1:
                 self.alpha = 1
                 self.outro = False
                 #Terminou a outro
                 if self.selection == self.tryAgain:
-                    self.manager.changeState(1)
+                    self.manager.changeState("Game")
                     pass #Muda pra tela de jogo
                 elif self.selection == self.voltarMenu:
-                    self.manager.changeState(0)
+                    self.manager.changeState("Menu")
                     pass #Muda pra tela de menu
 
     def render(self, renderer):

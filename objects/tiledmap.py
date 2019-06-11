@@ -20,6 +20,7 @@ class TiledMap:
                         if obj.type[:2] == "c_":
                             c = Concerto(obj, defaultScene)
                             objectList.append(c)
+                            defaultScene.total_concertos += 1
                         if obj.type[:2] == "f_":
                             f = Ferramenta(obj, defaultScene)
                             objectList.append(f)

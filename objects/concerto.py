@@ -28,6 +28,10 @@ class Concerto(GameObject):
                         if self.fix > 1:
                             self.defaultScene.removeObject(self)
                             self.defaultScene.score += 1
+                            if self.defaultScene.score == self.defaultScene.total_concertos:
+                                #Mapa concluido, faz transição
+                                
+                                self.defaultScene.completeLevel()
                             fixed = pygame.mixer.Sound("res/sounds/fixed.wav")
                             pygame.mixer.Sound.play(fixed)
                 else:

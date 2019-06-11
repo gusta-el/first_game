@@ -55,13 +55,13 @@ class MenuScene(Scene):
                 #Terminou a outro
 
                 if self.selection == self.start_r:
-                    self.manager.changeState(1)
+                    self.manager.changeState("LevelSelect")
                     pass #Muda pra tela de jogo
                 elif self.selection == self.options:
-                    self.manager.changeState(2)
+                    self.manager.changeState("Options")
                     pass #Muda pra tela de opções
                 elif self.selection == self.credits:
-                    self.manager.changeState(3)
+                    #self.manager.changeState("Credits")
                     pass #Muda pra tela de créditos
 
             
@@ -89,12 +89,8 @@ class MenuScene(Scene):
     def input(self, event):
         
         if pygame.key.get_pressed()[pygame.K_SPACE]:
-            if self.selection == self.start_r:
-                self.manager.changeState(1)
-            if self.selection == self.options:
-                self.manager.changeState(2)
-            if self.selection == self.credits:
-                self.manager.changeState(3)
+            self.outro = True
+            self.intro = False
 
         if not self.outro:
             if event.type == pygame.KEYDOWN:

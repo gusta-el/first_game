@@ -10,21 +10,26 @@ class Renderer:
         self.font = pygame.font.SysFont('Comic Sans MS', 15)
         self.shape_surface = pygame.Surface(pygame.screen_size, pygame.SRCALPHA)
 
+    def setFont(self, family, size):
+        self.font = pygame.font.SysFont(family, size)
+
     def produceSound(self,sound):
         crash_sound = pygame.mixer.Sound("res/sounds/" + sound + ".wav")
         pygame.mixer.Sound.play(crash_sound)
+
+    def drawTextWithFont(self, font, text, x, y, color=None):
+        if color == None:
+            s = font.render(text, False, self.color)
+        else:
+            s = font.render(text, False, color)
+        s.set_alpha(self.color.a)
+        self.screen.blit(s, (x, y))
 
     def drawText(self, text, x, y, color=None):
         if color == None:
             s = self.font.render(text, False, self.color)
         else:
             s = self.font.render(text, False, color)
-        s.set_alpha(self.color.a)
-        self.screen.blit(s, (x, y))
-
-    def drawScoreAndTime(self, text, x, y):
-        self.color = pygame.Color(255, 255, 255, 1)
-        self.font = pygame.font.SysFont('Comic Sans MS', 15)
         s.set_alpha(self.color.a)
         self.screen.blit(s, (x, y))
 
@@ -58,6 +63,10 @@ class Renderer:
             x2 - self.camera_pos.x + pygame.screen_size[0]//2,
             y2 - self.camera_pos.y + pygame.screen_size[1]//2
         ))
+
+    def resetCamera(self):
+        self.camera_pos.x = pygame.screen_size[0]//2
+        self.camera_pos.y = pygame.screen_size[1]//2
 
     def drawRect(self, x, y, w, h):
         #self.shape_surface.set_alpha(self.color.a)
