@@ -42,13 +42,13 @@ class MenuScene(Scene):
         self.tweenSelection["height"] += (self.selection.height - self.tweenSelection["height"])/5
 
         if self.intro:
-            self.alpha -= 0.5 * delta
+            self.alpha -= delta
             if self.alpha <= 0:
                 self.alpha = 0
                 self.intro = False
                 #Terminou a intro
         elif self.outro:
-            self.alpha += 0.5 * delta
+            self.alpha += delta
             if self.alpha >= 1:
                 self.alpha = 1
                 self.outro = False

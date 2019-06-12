@@ -10,12 +10,15 @@ from objects.particle import Particle
 from datetime import datetime
 import random
 from scenes.resultScene import ResultScene
+from objects.dialog import Dialog
 
 class DefaultScene(Scene):
 
     mapa = "batata"
 
     def start(self):
+
+        self.dialog = Dialog()
 
         self.intro = True
         self.outro = False
@@ -53,6 +56,18 @@ class DefaultScene(Scene):
         self.character1.control = True
 
         self.score = 0
+
+        if DefaultScene.tutorial:
+            self.dialog.openDialog([
+                "Cada ferramenta conserta algo. Fique perto de uma ferramenta e aperte Z para pega-la",
+                #Pega a Ferramenta e procede até um local quebrado
+                "Essa ferramenta conserta o objeto destacado em vermelho. Encoste nele e segure a tecla Z para conserta-lo",
+                #Após consetar procede até um outro local para soltar a ferramenta
+                "Perfeito! para soltar a ferramenta pressione X",
+                #Fase de tutorial termina
+                "Utilize as demais ferramentas para consertar os demais materiais quebrados. Atenção: José e João consertam coisas separadamente, aperte Espaço para trocar de personagem."
+            ])
+
         pass
 
     def completeLevel(self):
@@ -62,19 +77,23 @@ class DefaultScene(Scene):
         pass
 
     def input(self, event):
-        for obj in self.objects:
-            obj.input(event)
+
+        self.dialog.input(event)
+
+        if not self.dialog.open:
+            for obj in self.objects:
+                obj.input(event)
         
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if self.character1.control == True:
-                    self.character1.control = False
-                    self.character2.control = True
-                    self.currentCharacter = self.character2
-                else:
-                    self.character1.control = True
-                    self.character2.control = False    
-                    self.currentCharacter = self.character1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    if self.character1.control == True:
+                        self.character1.control = False
+                        self.character2.control = True
+                        self.currentCharacter = self.character2
+                    else:
+                        self.character1.control = True
+                        self.character2.control = False    
+                        self.currentCharacter = self.character1
         pass
 
     def removeObject(self, object):
@@ -85,7 +104,9 @@ class DefaultScene(Scene):
         p = Particle(position, vel, Vector2(0, 0), random.randrange(3, 5), cor, self)
         self.objects.append(p)
 
-    def update(self, delta):    
+    def update(self, delta):
+
+        self.dialog.update(delta)
 
         if self.intro:
             self.alpha -= delta
@@ -112,7 +133,7 @@ class DefaultScene(Scene):
 
         self.world.update(delta)
 
-        if not self.transition_end:
+        if not self.transition_end and not self.dialog.open:
             self.initial_time += delta
 
         if self.initial_time >= self.deadline_time:
@@ -158,6 +179,8 @@ class DefaultScene(Scene):
         renderer.resetCamera()
         renderer.drawTexture(self.complete_img, pygame.screen_size[0]//2, self.complete_y, rotation=self.complete_rot)
         
+        self.dialog.render(renderer)
+
         #Desenha o fade in/out
         renderer.startShape()
         renderer.setColor(0, 0, 0, int(self.alpha * 255))

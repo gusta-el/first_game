@@ -57,6 +57,10 @@ class LevelSelectScene(Scene):
                 #Terminou a outro
                 #Checa qual a fase, carrega ela no mapa, e troca de cena
                 DefaultScene.mapa = self.map_urls[self.selection // 400]
+                if self.selection == 0:
+                    DefaultScene.tutorial = True
+                else:
+                    DefaultScene.tutorial = False
                 self.manager.changeState("Game")
 
 
