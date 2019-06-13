@@ -51,7 +51,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,274,274,274,274,274,274,274,274,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,290,290,290,290,290,290,290,290,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,274,274,274,0,0,0,0,0,274,274,274,274,274,274,274,274,274,306,306,306,306,306,306,306,306,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,290,290,290,0,0,0,0,0,290,290,290,290,290,290,290,290,290,0,0,0,0,0,0,134,134,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,290,290,290,0,0,0,0,0,290,290,290,290,290,290,290,290,290,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,306,306,306,0,0,0,0,0,306,306,306,306,306,306,306,306,306,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,274,274,274,274,274,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -129,23 +129,12 @@
   <object id="42" type="block" x="512.583" y="173.084" width="32" height="44.9997"/>
  </objectgroup>
  <objectgroup id="9" name="Concertos">
-  <object id="46" type="c_chave_de_fenda" gid="321" x="128" y="470" width="32" height="32"/>
-  <object id="47" type="c_chave_de_fenda" gid="321" x="319.333" y="314.667" width="32" height="32"/>
-  <object id="48" type="c_chave_de_fenda" gid="321" x="609" y="341.667" width="32" height="32"/>
-  <object id="49" type="c_chave_de_fenda" gid="321" x="927.667" y="251" width="32" height="32"/>
-  <object id="50" gid="322" x="210.667" y="829.333" width="32" height="32"/>
-  <object id="51" type="c_cimento" gid="322" x="190.667" y="685.333" width="32" height="32"/>
-  <object id="52" type="c_cimento" gid="322" x="458.667" y="557.333" width="32" height="32"/>
-  <object id="53" type="c_cimento" gid="322" x="352" y="766.667" width="32" height="32"/>
-  <object id="54" type="c_cimento" gid="322" x="365.333" y="528" width="32" height="32"/>
-  <object id="55" type="c_cimento" gid="322" x="436" y="306.667" width="32" height="32"/>
-  <object id="56" type="c_cimento" gid="322" x="572" y="480" width="32" height="32"/>
+  <object id="48" type="c_chave_de_fenda" gid="321" x="574.333" y="316.334" width="32" height="32"/>
+  <object id="55" type="c_cimento" gid="322" x="423.333" y="386.334" width="32" height="32"/>
   <object id="57" type="c_chave_inglesa" gid="323" x="512" y="224" width="32" height="32"/>
-  <object id="58" type="f_chave_de_fenda" gid="324" x="434" y="446" width="32" height="32"/>
-  <object id="59" type="f_martelo" gid="325" x="583" y="551" width="32" height="32"/>
-  <object id="60" type="f_chave_inglesa" gid="326" x="585" y="414" width="32" height="32"/>
-  <object id="61" type="f_cimento" gid="327" x="289" y="620" width="32" height="32"/>
-  <object id="62" type="f_cimento" gid="327" x="324" y="485.333" width="32" height="32"/>
+  <object id="58" type="f_chave_de_fenda" gid="324" x="864" y="320" width="32" height="32"/>
+  <object id="60" type="f_chave_inglesa" gid="326" x="586" y="512" width="32" height="32"/>
+  <object id="62" type="f_cimento" gid="327" x="387.333" y="224" width="32" height="32"/>
   <object id="63" type="f_cimento" gid="16" x="-541.333" y="1270.67" width="32" height="32"/>
  </objectgroup>
 </map>

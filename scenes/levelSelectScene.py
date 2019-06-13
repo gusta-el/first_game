@@ -25,7 +25,7 @@ class LevelSelectScene(Scene):
             False
         ]
         self.map_urls = [
-            "res/mapas/casita.tmx",
+            "res/mapas/fase1.tmx",
             "nada"
         ]
         self.cadeado = pygame.image.load("res/cadeado.png")

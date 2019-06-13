@@ -9,8 +9,9 @@ class GameOverScene(Scene):
         super().__init__(manager)
 
     def start(self):
-
         self.game_over_song = False
+        #self.mus = pygame.mixer.Sound("res/sounds/game_over.wav")
+        
         self.gameOver = pygame.image.load("res/gameOver.jpg")
         self.alpha = 1
         self.screen_size = Vector2(pygame.screen_size[0], pygame.screen_size[1])
@@ -33,7 +34,6 @@ class GameOverScene(Scene):
 
         self.intro = True
         self.outro = False
-
         pass
 
     def input(self, event):
@@ -55,7 +55,6 @@ class GameOverScene(Scene):
 
 
     def update(self, delta):
-        
         self.tweenSelection["x"] += (self.selection.x - self.tweenSelection["x"])/5
         self.tweenSelection["y"] += (self.selection.y - self.tweenSelection["y"])/5
         self.tweenSelection["width"] += (self.selection.width - self.tweenSelection["width"])/5
@@ -81,14 +80,12 @@ class GameOverScene(Scene):
                     pass #Muda pra tela de menu
 
     def render(self, renderer):
-       
         if self.manager.sound == False:
             pygame.mixer.music.stop()
             self.menu_song  = False
         if self.manager.sound == True:        
             if self.game_over_song == False:
-                song_go = pygame.mixer.music.load("res/sounds/game_over.wav")
-                pygame.mixer.music.play(1)
+                #self.mus.play()
                 self.result_scene_song = True
 
 
@@ -106,5 +103,5 @@ class GameOverScene(Scene):
         renderer.setColor(0, 0, 0, int(self.alpha * 255))
         renderer.fillRect(0, 0, self.screen_size.x, self.screen_size.y)
         renderer.endShape()        
-        pass
+
 

@@ -9,6 +9,7 @@ class MenuScene(Scene):
         super().__init__(manager)
 
     def start(self):
+        pygame.mixer.music.load("res/sounds/menu_Song.mp3")
         self.menu_bg = pygame.image.load("res/menu_default.jpg")
         self.menu_song = False
         self.alpha = 1
@@ -73,7 +74,6 @@ class MenuScene(Scene):
             self.menu_song  = False
         if self.manager.sound == True:        
             if self.menu_song == False:
-                menu_song = pygame.mixer.music.load("res/sounds/menu_Song.mp3")
                 pygame.mixer.music.play(-1)
                 self.menu_song  = True
         #menu_song.play(-1)

@@ -60,13 +60,17 @@ class DefaultScene(Scene):
 
         if DefaultScene.tutorial:
             self.dialog.openDialog([
-                "Cada ferramenta conserta algo./n Fique perto de uma ferramenta e aperte Z para pega-la",
+                "Cada ferramenta conserta algo.",
+                "Fique perto de uma ferramenta e aperte Z para pega-la",
                 #Pega a Ferramenta e procede até um local quebrado
-                "Essa ferramenta conserta o objeto destacado em vermelho. Encoste nele e segure a tecla Z para conserta-lo",
-                #Após consetar procede até um outro local para soltar a ferramenta
+                "Essa ferramenta conserta o objeto destacado em vermelho.",
+                "Encoste nele e segure a tecla Z para conserta-lo",
+                #Após consetars procede até um outro local para soltar a ferramenta
                 "Perfeito! para soltar a ferramenta pressione X",
                 #Fase de tutorial termina
-                "Utilize as demais ferramentas para consertar os demais materiais quebrados. Atenção: José e João consertam coisas separadamente, aperte Espaço para trocar de personagem."
+                "Utilize as demais ferramentas para consertar os demais materiais quebrados.",
+                "Atenção: José e João consertam coisas separadamente",
+                "Aperte Espaço para trocar de personagem."
             ])
 
         pass
@@ -126,6 +130,7 @@ class DefaultScene(Scene):
                     self.manager.changeState("Result")
                 else:
                     self.manager.changeState("GameOver")
+                    return
 
                 #Terminou a outro 
         

@@ -44,7 +44,7 @@ class TiledMap:
                     if obj.type == "block":
                         b = Body(Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), 'rect', Vector2(obj.width, obj.height), 'static')
                         world.addBody(b)
-                    elif obj.image != None and obj.type == "":
+                    if obj.image != None and obj.type == "block" or obj.type == "":
                         b = MapProp(Vector2(obj.x - 16 + obj.width/2, obj.y - 16 + obj.height/2), obj.image)
                         objectList.append(b)
                         pass
