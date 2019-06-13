@@ -11,6 +11,10 @@ class ResultScene(Scene):
         pass
 
     def start(self):
+
+
+        self.result_scene_song = False
+
         self.alpha = 1
         self.intro = True
         self.outro = False
@@ -46,6 +50,14 @@ class ResultScene(Scene):
 
 
     def render(self, renderer):
+        if self.manager.sound == False:
+            pygame.mixer.music.stop()
+            self.menu_song  = False
+        if self.manager.sound == True:  
+            if self.result_scene_song == False:
+                result_song = pygame.mixer.music.load("res/sounds/you_win.mp3")
+                pygame.mixer.music.play(1)
+                self.result_scene_song = True
 
         #Desenha fundo
         renderer.resetCamera()
@@ -66,6 +78,10 @@ class ResultScene(Scene):
         renderer.drawTextWithFont(self.font, "Tempo: " + str(int(self.tween_time)), 300, 250)
         renderer.drawTextWithFont(self.font, "Score: " + str(int(self.tween_score)), 300, 300)
 
+        renderer.setColor(0, 0, 0, 255)
+        proxima_fase = "Aperte espaço para voltar ao menu principal"
+        renderer.drawTextWithFont(self.font, proxima_fase, 300, 400)
+
         #Desenha o fade in/out
         renderer.startShape()
         renderer.setColor(0, 0, 0, int(self.alpha * 255))
@@ -74,4 +90,9 @@ class ResultScene(Scene):
 
 
     def input(self, event):
+                
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
+            self.outro = True
+            self.intro = False
+
         pass

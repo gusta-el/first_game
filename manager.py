@@ -5,6 +5,7 @@ from scenes.optionsScene import OptionScene
 from scenes.gameOverScene import GameOverScene
 from scenes.levelSelectScene import LevelSelectScene
 from scenes.resultScene import ResultScene
+from scenes.creditsScene import CreditsScene
 
 class Manager:
 
@@ -17,6 +18,8 @@ class Manager:
         self.all_scenes["GameOver"] = GameOverScene(self)
         self.all_scenes["LevelSelect"] = LevelSelectScene(self)
         self.all_scenes["Result"] = ResultScene(self)
+        self.all_scenes["Credits"] = CreditsScene(self)
+        self.sound = True
 
     def changeState(self, index):
         self.index = index

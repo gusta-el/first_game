@@ -9,6 +9,8 @@ class GameOverScene(Scene):
         super().__init__(manager)
 
     def start(self):
+
+        self.game_over_song = False
         self.gameOver = pygame.image.load("res/gameOver.jpg")
         self.alpha = 1
         self.screen_size = Vector2(pygame.screen_size[0], pygame.screen_size[1])
@@ -80,6 +82,16 @@ class GameOverScene(Scene):
 
     def render(self, renderer):
        
+        if self.manager.sound == False:
+            pygame.mixer.music.stop()
+            self.menu_song  = False
+        if self.manager.sound == True:        
+            if self.game_over_song == False:
+                song_go = pygame.mixer.music.load("res/sounds/game_over.wav")
+                pygame.mixer.music.play(1)
+                self.result_scene_song = True
+
+
         renderer.camera_pos = Vector2(0, 0)
         renderer.drawTexture(self.gameOver, 0, 0, pygame.screen_size[0], pygame.screen_size[1])
 

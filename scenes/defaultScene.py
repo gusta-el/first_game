@@ -20,6 +20,7 @@ class DefaultScene(Scene):
 
         self.dialog = Dialog()
 
+        self.default_scene_song = False
         self.intro = True
         self.outro = False
         self.alpha = 1
@@ -59,7 +60,7 @@ class DefaultScene(Scene):
 
         if DefaultScene.tutorial:
             self.dialog.openDialog([
-                "Cada ferramenta conserta algo. Fique perto de uma ferramenta e aperte Z para pega-la",
+                "Cada ferramenta conserta algo./n Fique perto de uma ferramenta e aperte Z para pega-la",
                 #Pega a Ferramenta e procede até um local quebrado
                 "Essa ferramenta conserta o objeto destacado em vermelho. Encoste nele e segure a tecla Z para conserta-lo",
                 #Após consetar procede até um outro local para soltar a ferramenta
@@ -153,6 +154,16 @@ class DefaultScene(Scene):
         return val.z
 
     def render(self, renderer):
+
+        if self.manager.sound == False:
+            pygame.mixer.music.stop()
+            self.menu_song  = False
+        if self.manager.sound == True:        
+            if self.default_scene_song == False:
+                default_song = pygame.mixer.music.load("res/sounds/level_song.wav")
+                pygame.mixer.music.play(-1)
+                self.default_scene_song = True
+
         self.tiledmap.render(renderer)
 
         self.objects.sort(key = self.sortZ)

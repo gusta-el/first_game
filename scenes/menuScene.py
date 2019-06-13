@@ -10,6 +10,7 @@ class MenuScene(Scene):
 
     def start(self):
         self.menu_bg = pygame.image.load("res/menu_default.jpg")
+        self.menu_song = False
         self.alpha = 1
         self.screen_size = Vector2(pygame.screen_size[0], pygame.screen_size[1])
         self.zero = Vector2(self.screen_size.x/2, self.screen_size.y/2)
@@ -61,11 +62,23 @@ class MenuScene(Scene):
                     self.manager.changeState("Options")
                     pass #Muda pra tela de opções
                 elif self.selection == self.credits:
-                    #self.manager.changeState("Credits")
+                    self.manager.changeState("Credits")
                     pass #Muda pra tela de créditos
 
             
     def render(self, renderer):
+        
+        if self.manager.sound == False:
+            pygame.mixer.music.stop()
+            self.menu_song  = False
+        if self.manager.sound == True:        
+            if self.menu_song == False:
+                menu_song = pygame.mixer.music.load("res/sounds/menu_Song.mp3")
+                pygame.mixer.music.play(-1)
+                self.menu_song  = True
+        #menu_song.play(-1)
+        #pygame.mixer.Sound.play(menu_song)
+        
         #Reseta a posição da camera
         renderer.camera_pos = self.zero
 

@@ -37,10 +37,10 @@ class OptionScene(Scene):
     def input(self, event):
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             if self.selection == self.ligar:
-                #Liga audio
+                self.manager.sound = True
                 pass
             elif self.selection == self.desligar:
-                #Desliga audio
+                self.manager.sound = False
                 pass
             elif self.selection == self.voltar:
                 self.manager.changeState("Menu")
