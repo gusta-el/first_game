@@ -15,13 +15,30 @@ class CreditsScene (Scene):
         self.screen_size = Vector2(pygame.screen_size[0], pygame.screen_size[1])
         self.zero = Vector2(self.screen_size.x/2, self.screen_size.y/2)
 
+        self.intro = True
+        self.outro = False
+
     def input(self, event):
         if pygame.key.get_pressed()[pygame.K_SPACE]:
-            self.manager.changeState("Menu")
+            self.outro = True
+            self.intro = False
             pass
 
 
     def update(self, delta):
+        if self.intro:
+            self.alpha -= delta
+            if self.alpha <= 0:
+                self.alpha = 0
+                self.intro = False
+                #Terminou a intro
+        elif self.outro:
+            self.alpha += delta
+            if self.alpha >= 1:
+                self.alpha = 1
+                self.outro = False
+                self.manager.changeState("Menu")
+
         pass
 
     def render(self, renderer):

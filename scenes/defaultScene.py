@@ -27,7 +27,7 @@ class DefaultScene(Scene):
         self.screen_size = Vector2(pygame.screen_size[0], pygame.screen_size[1])
 
         self.transition_end = False
-        self.deadline_time = 60
+        self.deadline_time = 90
         self.initial_time  = 0
 
         self.complete_img = pygame.image.load("res/complete.png")
@@ -181,7 +181,7 @@ class DefaultScene(Scene):
         renderer.setColor(255, 255, 255, 255)
 
         renderer.drawText("PONTUAÇÃO", 70, 10)
-        renderer.drawText(str(self.score) , 110, 25)
+        renderer.drawText(str(self.score) + "/" + str(self.total_concertos) , 110, 25)
         
         renderer.drawText("TEMPO", 320, 10)
         if self.deadline_time - self.initial_time < 5:

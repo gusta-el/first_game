@@ -42,7 +42,7 @@ class ResultScene(Scene):
             if self.alpha >= 1:
                 self.alpha = 1
                 self.outro = False
-                self.manager.changeState("Menu")
+                self.manager.changeState("LevelSelect")
 
         if not self.intro:
             self.tween_score += (ResultScene.score - self.tween_score) / 20
